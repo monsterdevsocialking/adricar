@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ADRICAR | Aluguer de Carros Premium em Angola</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- GSAP + Lenis + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#c5e7ff",
+              "primary-fixed": "#ffdad7",
+              "tertiary-fixed-dim": "#80cfff",
+              "on-tertiary-fixed": "#001e2d",
+              "primary-container": "#d90429",
+              "on-secondary": "#2f3131",
+              "surface-tint": "#ffb3af",
+              "secondary-fixed": "#e2e2e2",
+              "on-error-container": "#ffdad6",
+              "surface-bright": "#493432",
+              "inverse-on-surface": "#402b2a",
+              "error": "#ffb4ab",
+              "primary": "#ffb3af",
+              "on-primary-container": "#ffeae8",
+              "on-primary-fixed": "#410005",
+              "outline-variant": "#5d3f3d",
+              "inverse-primary": "#bf0022",
+              "on-background": "#fddbd8",
+              "secondary-fixed-dim": "#c6c6c7",
+              "tertiary": "#80cfff",
+              "inverse-surface": "#fddbd8",
+              "on-surface-variant": "#e7bcba",
+              "surface-variant": "#452f2e",
+              "on-error": "#690005",
+              "secondary-container": "#454747",
+              "surface-container-lowest": "#1a0a09",
+              "surface-container-low": "#291716",
+              "surface-dim": "#200f0e",
+              "background": "#200f0e",
+              "outline": "#ae8885",
+              "on-surface": "#fddbd8",
+              "on-tertiary-fixed-variant": "#004c6b",
+              "secondary": "#c6c6c7",
+              "surface-container": "#2d1b1a",
+              "on-secondary-fixed-variant": "#454747",
+              "surface": "#200f0e",
+              "on-tertiary": "#00344b",
+              "on-tertiary-container": "#e0f1ff",
+              "error-container": "#93000a",
+              "on-primary": "#68000e",
+              "on-primary-fixed-variant": "#930018",
+              "on-secondary-fixed": "#1a1c1c",
+              "surface-container-high": "#392524",
+              "tertiary-container": "#0074a0",
+              "on-secondary-container": "#b4b5b5",
+              "surface-container-highest": "#452f2e",
+              "primary-fixed-dim": "#ffb3af"
+            },
+            borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+            spacing: { gutter: "24px", base: "8px", "margin-desktop": "64px", "margin-mobile": "16px", "container-max": "1280px" },
+            fontFamily: { "body-lg": ["Inter"], "headline-md": ["Montserrat"], "headline-sm": ["Montserrat"], "label-md": ["Inter"], "body-md": ["Inter"], "display-lg": ["Montserrat"], "headline-lg": ["Montserrat"] },
+            fontSize: {
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-md": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+              "headline-sm": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+              "label-md": ["14px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+              "headline-lg": ["40px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "700" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* --- PREMIUM EFFECTS --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow-x: hidden; background-color: #200f0e; }
+        .glass-card { background: rgba(28, 28, 28, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .hero-gradient { background: linear-gradient(to bottom, rgba(11, 11, 11, 0.4), rgba(11, 11, 11, 0.95)); }
+        .red-glow { box-shadow: 0 0 40px rgba(217, 4, 41, 0.3); transition: box-shadow 0.3s ease; }
+        .btn-shine { background: linear-gradient(135deg, #ef233c, #d90429); background-size: 200% auto; transition: all 0.3s ease; }
+        .btn-shine:hover { background-position: right center; box-shadow: 0 0 20px #d90429; transform: scale(1.02); }
+        .stealth-input { background: #1C1C1C; border-bottom: 2px solid #5d3f3d; transition: border-color 0.3s, box-shadow 0.3s; }
+        .stealth-input:focus { outline: none; border-color: #ffb3af; box-shadow: 0 2px 10px rgba(255, 179, 175, 0.3); }
+        .nav-blur { background: rgba(32, 15, 14, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.4s ease; }
+        .nav-initial { background: transparent; backdrop-filter: blur(0px); border-bottom: 1px solid rgba(255,255,255,0); }
+        #preloader { position: fixed; inset: 0; background: #0a0505; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .car-loader { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 280px; }
+        .car-svg { width: 200px; height: auto; filter: drop-shadow(0 0 8px #d90429); animation: floatGlow 1.6s infinite alternate; }
+        .progress-bar-track { width: 100%; height: 3px; background: rgba(217,4,41,0.3); border-radius: 10px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: #d90429; box-shadow: 0 0 12px #ff3b5c; transition: width 0.12s linear; }
+        @keyframes floatGlow { 0% { transform: translateX(-12px); filter: drop-shadow(0 0 2px #d90429); } 100% { transform: translateX(12px); filter: drop-shadow(0 0 15px #ff4d6d); } }
+        .wheel-spin { animation: wheelRoll 0.6s linear infinite; transform-origin: center; }
+        @keyframes wheelRoll { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .hero-zoom { animation: subtleZoom 20s ease-out infinite alternate; }
+        @keyframes subtleZoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+        .car-card { transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .car-card:hover { transform: translateY(-8px); border-color: rgba(217,4,41,0.5); box-shadow: 0 25px 35px -12px rgba(0,0,0,0.6); }
+        .float-card { animation: floating 4s ease-in-out infinite; }
+        @keyframes floating { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
+        .mobile-menu { transition: transform 0.3s ease, opacity 0.3s; transform: translateX(100%); }
+        .mobile-menu.open { transform: translateX(0); }
+        .fade-up { opacity: 0; transform: translateY(35px); transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .fade-up.revealed { opacity: 1; transform: translateY(0); }
+        .faq-item.active .faq-answer { max-height: 300px; opacity: 1; margin-top: 1rem; }
+        .faq-answer { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .faq-icon { transition: transform 0.3s ease; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a0a09; }
+        ::-webkit-scrollbar-thumb { background: #d90429; border-radius: 6px; }
+        input[type="range"] { -webkit-appearance: none; background: #2d1b1a; height: 4px; border-radius: 5px; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #d90429; cursor: pointer; box-shadow: 0 0 8px #d90429; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- PREMIUM LOADER -->
+<div id="preloader">
+  <div class="car-loader">
+    <svg class="car-svg" width="220" height="80" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40,60 L60,30 L100,30 L120,55 L180,55 L200,30 L240,30 L260,60 L260,75 L40,75 L40,60Z" stroke="#d90429" stroke-width="3" fill="none" stroke-linejoin="round"/>
+      <circle cx="80" cy="75" r="12" stroke="#d90429" stroke-width="3" fill="#1a0a09" class="wheel-spin"/>
+      <circle cx="220" cy="75" r="12" stroke="#d90429" stroke-width="3" fill="#1a0a09" class="wheel-spin"/>
+      <path d="M110,45 L130,45 L140,55 L110,55 Z" fill="#d90429" opacity="0.8"/>
+      <path d="M200,45 L220,45 L210,55 L200,55 Z" fill="#d90429" opacity="0.8"/>
+      <line x1="130" y1="55" x2="170" y2="55" stroke="#ffb3af" stroke-width="2"/>
+    </svg>
+    <div class="progress-bar-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="text-primary text-xs tracking-widest uppercase font-bold">CARREGANDO EXPERIÊNCIA PREMIUM</p>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header id="mainHeader" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 nav-initial">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-4 flex items-center justify-between">
+    <div class="font-headline-lg text-headline-lg font-extrabold tracking-tighter text-on-surface transition-all duration-300 hover:text-primary hover:drop-shadow-[0_0_8px_rgba(217,4,41,0.6)]">ADRICAR</div>
+    <nav class="hidden md:flex items-center gap-8">
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full font-label-md text-label-md" href="#">Início</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full font-label-md text-label-md" href="#">Frota</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full font-label-md text-label-md" href="#">Serviços</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full font-label-md text-label-md" href="#">Sobre</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full font-label-md text-label-md" href="#">Contacto</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <button class="bg-primary-container text-on-primary-container px-6 py-2 font-label-md text-label-md font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_#d90429]">RESERVAR AGORA</button>
+      <button id="mobileMenuBtn" class="md:hidden text-white"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+  </div>
+  <div id="mobileMenuPanel" class="mobile-menu fixed top-0 right-0 w-3/4 h-full bg-surface-container-high backdrop-blur-xl z-50 shadow-2xl border-l border-white/10 p-6 flex flex-col gap-6">
+    <div class="flex justify-end"><button id="closeMobileMenu"><span class="material-symbols-outlined text-white">close</span></button></div>
+    <a class="text-white text-xl font-bold py-2 border-b border-white/10" href="#">Início</a>
+    <a class="text-white text-xl font-bold py-2 border-b border-white/10" href="#">Frota</a>
+    <a class="text-white text-xl font-bold py-2 border-b border-white/10" href="#">Serviços</a>
+    <a class="text-white text-xl font-bold py-2 border-b border-white/10" href="#">Sobre</a>
+    <a class="text-white text-xl font-bold py-2 border-b border-white/10" href="#">Contacto</a>
+  </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="relative h-screen min-h-[800px] flex items-center overflow-hidden">
+  <div class="absolute inset-0 z-0 hero-zoom">
+    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaaGesQCZEWOLg_TvuIoseKt8eoHPMw0reX0jgUO6myqadK6BAjfEQ9eW_qoql1IDaBL6XoTuI585xfH-KCjcJHbQ0zYuQ3zM5ifclluf625yP_XpPkYRqz-6v_WTdMHfbDcaRmML1RkFTi9KD50OLjEhdKDrCxpuIIYQqTbWHR_b3UFt97xuIYQhQ7BaR7R5OKLqugisjmXegdYYl9kqGXxUEHN-9hS_qtfUasynB-SX6FLMWySJHbqDnXy65LlBrp-oFfO46mEw" alt="luxury car"/>
+    <div class="absolute inset-0 hero-gradient"></div>
+  </div>
+  <div class="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+    <div class="max-w-3xl fade-up">
+      <h1 class="font-display-lg text-display-lg text-white mb-6 uppercase tracking-tight">ALUGUE O CARRO IDEAL EM MINUTOS</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl">Veículos executivos, SUVs e viaturas premium para negócios, viagens e eventos em Angola.</p>
+      <div class="flex flex-wrap gap-4">
+        <button class="btn-shine text-white px-8 py-4 rounded-lg font-bold flex items-center gap-2 transition-all duration-300 hover:scale-105"><span class="material-symbols-outlined">brand_family</span> Reservar no WhatsApp</button>
+        <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-surface transition-all duration-300">Ver Frota</button>
+      </div>
+    </div>
+  </div>
+  <!-- SIMULATOR CORRIGIDO -->
+  <div class="absolute bottom-12 right-margin-desktop hidden xl:block w-96 glass-card p-8 rounded-xl red-glow float-card fade-up">
+    <h3 class="font-headline-sm text-headline-sm mb-6 text-white">Simulador</h3>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-xs font-bold uppercase text-on-surface-variant mb-1">Nome</label>
+        <input id="simNome" class="w-full stealth-input py-2 px-0 text-white placeholder:text-surface-variant" placeholder="Seu nome" type="text"/>
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase text-on-surface-variant mb-1">Telefone</label>
+        <input id="simTelefone" class="w-full stealth-input py-2 px-0 text-white placeholder:text-surface-variant" placeholder="+244" type="text"/>
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase text-on-surface-variant mb-1">Dias de aluguer</label>
+        <input id="diasRange" class="w-full accent-primary-container" max="30" min="1" type="range" value="5"/>
+        <div class="flex justify-between text-xs mt-1 text-on-surface-variant">
+          <span>1 dia</span>
+          <span id="diasValue">5</span>
+          <span>30 dias</span>
+        </div>
+      </div>
+      <div class="bg-surface-container-high p-4 rounded-lg border border-white/5 mt-6">
+        <p class="text-xs text-on-surface-variant uppercase font-bold mb-1">ORÇAMENTO ESTIMADO</p>
+        <p id="priceDisplay" class="text-2xl font-bold text-primary">180.000 KZ</p>
+      </div>
+      <button id="simularReservaBtn" class="w-full bg-primary-container text-white py-4 rounded-lg font-bold uppercase tracking-widest text-sm mt-4 hover:brightness-110 transition-all">RESERVAR AGORA</button>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS SECTION -->
+<section class="bg-surface-container-lowest py-20">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter text-center">
+      <div><div class="counter-value font-display-lg text-headline-lg text-primary mb-2" data-target="250">0</div><p class="font-label-md text-label-md text-on-surface-variant uppercase">Clientes satisfeitos</p></div>
+      <div><div class="counter-value font-display-lg text-headline-lg text-primary mb-2" data-target="40">0</div><p class="font-label-md text-label-md text-on-surface-variant uppercase">Viaturas disponíveis</p></div>
+      <div><div class="counter-value font-display-lg text-headline-lg text-primary mb-2" data-target="24">0</div><p class="font-label-md text-label-md text-on-surface-variant uppercase">Suporte rápido</p></div>
+      <div><div class="counter-value font-display-lg text-headline-lg text-primary mb-2" data-target="98">0</div><p class="font-label-md text-label-md text-on-surface-variant uppercase">Taxa de satisfação</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTITUTIONAL SECTION -->
+<section class="py-24 bg-surface">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid md:grid-cols-2 gap-20 items-center">
+    <div class="fade-up"><h2 class="font-headline-lg text-headline-lg text-white mb-8">Mobilidade com conforto e segurança</h2><div class="space-y-8"><div class="flex gap-4"><div class="w-12 h-12 bg-primary-container/20 rounded-lg flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary">directions_car</span></div><div><h4 class="font-headline-sm text-label-md text-white mb-2 uppercase">Modern Cars</h4><p class="text-on-surface-variant">Frota constantemente renovada com os modelos mais recentes do mercado executivo.</p></div></div><div class="flex gap-4"><div class="w-12 h-12 bg-primary-container/20 rounded-lg flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary">speed</span></div><div><h4 class="font-headline-sm text-label-md text-white mb-2 uppercase">Fast Service</h4><p class="text-on-surface-variant">Entrega rápida em aeroportos, hotéis ou na sua residência em toda Luanda.</p></div></div><div class="flex gap-4"><div class="w-12 h-12 bg-primary-container/20 rounded-lg flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary">security</span></div><div><h4 class="font-headline-sm text-label-md text-white mb-2 uppercase">Safety First</h4><p class="text-on-surface-variant">Rastreamento via satélite e assistência mecânica 24 horas por dia.</p></div></div></div></div>
+    <div class="relative group fade-up"><div class="bg-primary-container p-12 rounded-xl text-white relative z-10 overflow-hidden"><div class="relative z-20"><h3 class="font-headline-md text-headline-md mb-6 uppercase">SOLICITE UMA CHAMADA</h3><div class="space-y-4"><input id="callNome" class="w-full bg-white/10 border-white/20 rounded-lg py-3 px-4 placeholder:text-white/60 focus:bg-white/20 outline-none" placeholder="Seu Nome" type="text"/><input id="callTelefone" class="w-full bg-white/10 border-white/20 rounded-lg py-3 px-4 placeholder:text-white/60 focus:bg-white/20 outline-none" placeholder="Seu Telefone" type="tel"/><button id="ligarBtn" class="w-full bg-white text-primary-container font-bold py-4 rounded-lg hover:scale-95 transition-transform">LIGUEM-ME AGORA</button></div></div><div class="absolute -right-20 -bottom-20 opacity-30 group-hover:scale-110 transition-transform duration-700"><img class="w-96 h-96 object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWNdoyCuOgc9nLKcbKBcCyorsal4Pq7_q4hI6zFZKp5cW4KZart9UC_urigWj9DUjPpc4SuwN3HpIej9tZlfw4tAmxMgmXBbL4NGj3whg32pEpPRPAWZLWJn_0ntke5kC7XFvlBs3NZ-JKpL3jFYFf4HRwmf38ptbYVTW7kaU3S8gS3LjPC9iPDLWrMuC599i31rRVT2eAhWc6PdyJDavWvFDf96MQx3Ehl_VjN6hI_PB0T3bgBsE4jw3b-xkc7WCSxT6sGQzbUeI"/></div></div><div class="absolute inset-0 bg-primary-container blur-3xl opacity-20 -z-10 translate-y-10"></div></div>
+  </div>
+</section>
+
+<!-- FLEET GRID -->
+<section class="py-24 bg-surface-container-low">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"><div class="flex justify-between items-end mb-16"><div><h2 class="font-headline-lg text-headline-lg text-white mb-2">Nossa Frota Elite</h2><p class="text-on-surface-variant">Seleção exclusiva de viaturas de alto desempenho.</p></div><div class="hidden md:block"><button class="text-primary font-bold flex items-center gap-2 hover:gap-4 transition-all">VER TODOS OS MODELOS <span class="material-symbols-outlined">arrow_forward</span></button></div></div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="car-card bg-surface border border-white/5 rounded-xl overflow-hidden group"><div class="h-64 overflow-hidden"><img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyGeondt5nRoyuRl7DU-YOvEwc3XlMtJQaBFqAL5QhLmgzgHQo06vepY5dNVGBHo5j8ll5NMKv8SOZtg1A2FC7gyA5jRzlLkwMZZiibqBELh4kxBAL3oqfhl-prTeB7MYjdAkAjLCc7RomXpyn36MSn3LcmkleGn7ptgdFvGyGjn8DA9nGP_hPiGJNHAARVuqPDm1WQnIsVoo1EMdFwaP_Te-u87bmmvs71DldLhngcZhh8fesAAc6tbvC-7L2a35GUVFeasn0z5k"/></div><div class="p-6"><div class="flex justify-between items-start mb-4"><div><h3 class="font-headline-sm text-white">Toyota Prado</h3><p class="text-xs text-on-surface-variant uppercase font-bold">SUV Executivo</p></div><div class="text-right"><p class="text-primary font-bold">120.000 KZ</p><p class="text-[10px] text-on-surface-variant">POR DIA</p></div></div><div class="grid grid-cols-3 gap-2 mb-6"><div class="bg-surface-container p-2 rounded flex flex-col items-center"><span class="material-symbols-outlined text-sm text-primary">settings</span><span class="text-[10px] text-white mt-1">AUTO</span></div><div class="bg-surface-container p-2 rounded flex flex-col items-center"><span class="material-symbols-outlined text-sm text-primary">local_gas_station</span><span class="text-[10px] text-white mt-1">DIESEL</span></div><div class="bg-surface-container p-2 rounded flex flex-col items-center"><span class="material-symbols-outlined text-sm text-primary">ac_unit</span><span class="text-[10px] text-white mt-1">DUAL AC</span></div></div><button class="whatsapp-btn w-full bg-surface-container-highest text-white py-3 rounded font-bold text-xs uppercase hover:bg-primary-container transition-all flex items-center justify-center gap-2" data-carro="Toyota Prado" data-preco="120000"><span class="material-symbols-outlined text-lg">brand_family</span> Reservar no WhatsApp</button></div></div>
+      <div class="car-card bg-surface border border-white/5 rounded-xl overflow-hidden group"><div class="h-64 overflow-hidden"><img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkNpERCTFJmw0vcADnQfHwV4m8Dq2K1XZuPeDTALqZRxwK7uYLTVP7bysKrkFwVtGSQ4Y8lBUYB9UwBffT12xI2QD0KuT0avehJ4qrZirTKYEi4kEABVP66DdOcw-mGuC6mExBDEK5F8gFD-RvmBU8DlUcBgVe_eKhYD2Sn9yEAtGE1FZIyDJJdSkHFaGq6RYh1JHsBnX4-URMf06vgjTnYqYviJRZ9JWFqK0Z0aAl6QJs0aerub5lNIbgJjXsOgHc5hLaYnk2x9s"/></div><div class="p-6"><div class="flex justify-between items-start mb-4"><div><h3 class="font-headline-sm text-white">Mercedes S-Class</h3><p class="text-xs text-on-surface-variant uppercase font-bold">Viatura de Luxo</p></div><div class="text-right"><p class="text-primary font-bold">250.000 KZ</p><p class="text-[10px] text-on-surface-variant">POR DIA</p></div></div><div class="grid grid-cols-3 gap-2 mb-6"><div class="bg-surface-container p-2 rounded flex flex-col items-center"><span class="material-symbols-outlined text-sm text-primary">settings</span><span class="text-[10px] text-white mt-1">AUTO</span></div><div class="bg-surface-container p-2 rounded flex flex-col items-center"><span class="material-symbols-outlined text-sm text-primary">local_gas_station</span><span class="text-[10px] text-white mt-1">PETROL</span></div><div class="bg-surface-container p-2 rounded flex flex-col items-center"><span class="material-symbols-outlined text-sm text-primary">airline_seat_recline_extra</span><span class="text-[10px] text-white mt-1">COURO VIP</span></div></div><button class="whatsapp-btn w-full bg-surface-container-highest text-white py-3 rounded font-bold text-xs uppercase hover:bg-primary-container transition-all flex items-center justify-center gap-2" data-carro="Mercedes S-Class" data-preco="250000"><span class="material-symbols-outlined text-lg">brand_family</span> Reservar no WhatsApp</button></div></div>
+      <div class="car-card bg-surface border border-white/5 rounded-xl overflow-hidden group"><div class="h-64 overflow-hidden"><img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD8v9oe1X6wQlF6O4619oqWnP-nlz-y_SemOSG_3Wdp9fZL16-Ln2gm_71ov78RHHxYqYdJtKwyFMYTzYSoH_wFfUQ4f7CbaGTBIdqTsGB5s4fmuyI68vHKrMUPW2G6PEp1LTink4IIJC6SOdzgZCrNEo7FtsdQysGjLmK_qQ0Ne_oJPcMOrfJ5D4JZuawAF5loWBFva7dR6QR4Eux6zinzIpG0FgbNTpP58UrZYRaAsSA2tAY0kDRzYD7VkCW6DFOkmMj-qIDsfQ"/></div><div class="p-6"><div class="flex justify-between items-start mb-4"><div><h3 class="font-headline-sm text-white">Ford Ranger</h3><p class="text-xs text-on-surface-variant uppercase font-bold">Pick-up Premium</p></div><div class="text-right"><p class="text-primary font-bold">95.000 KZ</p><p class="text-[10px] text-on-surface-variant">POR DIA</p></div></div><div class="grid grid-cols-3 gap-2 mb-6"><div class="bg-surface-container p-2 rounded flex flex-col items-center"><span class="material-symbols-outlined text-sm text-primary">settings</span><span class="text-[10px] text-white mt-1">AUTO</span></div><div class="bg-surface-container p-2 rounded flex flex-col items-center"><span class="material-symbols-outlined text-sm text-primary">terrain</span><span class="text-[10px] text-white mt-1">4X4</span></div><div class="bg-surface-container p-2 rounded flex flex-col items-center"><span class="material-symbols-outlined text-sm text-primary">luggage</span><span class="text-[10px] text-white mt-1">CARGO</span></div></div><button class="whatsapp-btn w-full bg-surface-container-highest text-white py-3 rounded font-bold text-xs uppercase hover:bg-primary-container transition-all flex items-center justify-center gap-2" data-carro="Ford Ranger" data-preco="95000"><span class="material-symbols-outlined text-lg">brand_family</span> Reservar no WhatsApp</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="py-24 bg-white text-surface"><div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"><div class="text-center mb-16"><h2 class="font-headline-lg text-headline-lg mb-4 text-surface">Porquê Escolher a ADRICAR?</h2><p class="text-surface/60 max-w-2xl mx-auto">Excelência em cada detalhe, desde a reserva até a entrega da chave.</p></div><div class="grid md:grid-cols-3 gap-8"><div class="p-8 border border-surface/5 rounded-xl hover:shadow-xl transition-all"><span class="material-symbols-outlined text-4xl text-primary-container mb-4">bolt</span><h4 class="font-headline-sm text-label-md mb-2 uppercase">Velocidade Extrema</h4><p class="text-surface/70 text-sm">Processo de reserva simplificado que leva menos de 5 minutos via digital.</p></div><div class="p-8 border border-surface/5 rounded-xl hover:shadow-xl transition-all"><span class="material-symbols-outlined text-4xl text-primary-container mb-4">local_shipping</span><h4 class="font-headline-sm text-label-md mb-2 uppercase">Entrega Personalizada</h4><p class="text-surface/70 text-sm">Levamos a viatura até si, onde quer que esteja em Luanda e arredores.</p></div><div class="p-8 border border-surface/5 rounded-xl hover:shadow-xl transition-all"><span class="material-symbols-outlined text-4xl text-primary-container mb-4">support_agent</span><h4 class="font-headline-sm text-label-md mb-2 uppercase">Motoristas Bilingues</h4><p class="text-surface/70 text-sm">Serviço opcional de motorista privado, treinado em etiqueta e segurança.</p></div><div class="p-8 border border-surface/5 rounded-xl hover:shadow-xl transition-all"><span class="material-symbols-outlined text-4xl text-primary-container mb-4">health_and_safety</span><h4 class="font-headline-sm text-label-md mb-2 uppercase">Seguro Total</h4><p class="text-surface/70 text-sm">Todas as nossas viaturas possuem cobertura total contra danos e roubo.</p></div><div class="p-8 border border-surface/5 rounded-xl hover:shadow-xl transition-all"><span class="material-symbols-outlined text-4xl text-primary-container mb-4">workspace_premium</span><h4 class="font-headline-sm text-label-md mb-2 uppercase">Limpeza Impecável</h4><p class="text-surface/70 text-sm">Higienização completa e detalhada antes de cada nova entrega.</p></div><div class="p-8 border border-surface/5 rounded-xl hover:shadow-xl transition-all"><span class="material-symbols-outlined text-4xl text-primary-container mb-4">payments</span><h4 class="font-headline-sm text-label-md mb-2 uppercase">Preços Justos</h4><p class="text-surface/70 text-sm">Transparência total, sem taxas ocultas ou surpresas no momento do pagamento.</p></div></div></div></section>
+
+<!-- PROCESS SECTION -->
+<section class="py-24 bg-surface overflow-hidden"><div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"><h2 class="font-headline-lg text-headline-lg text-white mb-20 text-center">Como Funciona</h2><div class="relative"><div class="absolute top-1/2 left-0 w-full h-px bg-white/10 -translate-y-1/2 hidden md:block"></div><div class="grid md:grid-cols-4 gap-8 relative z-10"><div class="text-center group"><div class="w-16 h-16 bg-surface-container border border-white/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-container transition-colors"><span class="text-white font-bold">01</span></div><h4 class="text-white font-bold mb-2 uppercase text-xs tracking-widest">Escolha o Carro</h4><p class="text-on-surface-variant text-sm">Navegue pela nossa frota premium e selecione o ideal.</p></div><div class="text-center group"><div class="w-16 h-16 bg-surface-container border border-white/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-container transition-colors"><span class="text-white font-bold">02</span></div><h4 class="text-white font-bold mb-2 uppercase text-xs tracking-widest">WhatsApp Contact</h4><p class="text-on-surface-variant text-sm">Envie uma mensagem rápida com as datas desejadas.</p></div><div class="text-center group"><div class="w-16 h-16 bg-surface-container border border-white/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-container transition-colors"><span class="text-white font-bold">03</span></div><h4 class="text-white font-bold mb-2 uppercase text-xs tracking-widest">Confirmação</h4><p class="text-on-surface-variant text-sm">Receba a confirmação e detalhes de pagamento imediatos.</p></div><div class="text-center group"><div class="w-16 h-16 bg-surface-container border border-white/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-container transition-colors"><span class="text-white font-bold">04</span></div><h4 class="text-white font-bold mb-2 uppercase text-xs tracking-widest">Receba a Chave</h4><p class="text-on-surface-variant text-sm">Levante o carro ou receba-o no conforto da sua localização.</p></div></div></div></div></section>
+
+<!-- URGENCY + COUNTDOWN -->
+<section class="relative py-24 overflow-hidden"><div class="absolute inset-0 z-0"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT5T-tVrz28FxNo452XQ_DrR-zpS4xV3SMUdn10vdwshOSH8dR16yBxAXH5NZTWQ7zqCbA1dBWACTZxr35oQqe88sAGrnnKhHjtXqgdyt1xrIXpKj1amq-smm1pz9TCaUn8M9BfYF3wGW9-rtN_XE5rZGX0dOYIeJp3TC2ieFPYI3FCizN5D8Hzt9Egc9tctL2i_cd75gyEdUaZF755ikuX-BqRFwNQyE3utM8wIUL4zddcjPnBjRSgzwhkBmZhcrQBxkoO7EJ2K4"/><div class="absolute inset-0 bg-black/80"></div></div><div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center"><h2 class="font-display-lg text-headline-lg text-white mb-6 uppercase">ALGUMAS VIATURAS ESGOTAM RAPIDAMENTE</h2><p class="text-primary-fixed mb-12 max-w-xl mx-auto">Garanta a sua reserva agora para as próximas 48 horas e receba 10% de desconto adicional.</p><div class="flex justify-center gap-4 mb-12"><div class="countdown-block bg-surface/50 backdrop-blur p-4 rounded-lg w-24"><p id="hours" class="text-4xl font-bold text-white">02</p><p class="text-[10px] text-on-surface-variant uppercase">Horas</p></div><div class="countdown-block bg-surface/50 backdrop-blur p-4 rounded-lg w-24"><p id="minutes" class="text-4xl font-bold text-white">45</p><p class="text-[10px] text-on-surface-variant uppercase">Minutos</p></div><div class="countdown-block bg-surface/50 backdrop-blur p-4 rounded-lg w-24"><p id="seconds" class="text-4xl font-bold text-white">18</p><p class="text-[10px] text-on-surface-variant uppercase">Segundos</p></div></div><div class="max-w-xl mx-auto glass-card p-2 rounded-xl flex flex-col md:flex-row gap-2"><input id="urgTel" class="flex-grow bg-transparent border-none text-white focus:ring-0 px-4 py-3" placeholder="Seu Telefone / WhatsApp" type="text"/><button id="urgBtn" class="bg-primary-container text-white px-8 py-3 rounded-lg font-bold hover:brightness-110">RESERVAR AGORA</button></div></div></section>
+
+<!-- TESTIMONIALS -->
+<section class="py-24 bg-surface-container-low"><div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"><h2 class="font-headline-lg text-headline-lg text-white mb-16 text-center">O Que Dizem Nossos Clientes</h2><div class="grid md:grid-cols-2 gap-8"><div class="bg-surface p-10 rounded-xl border border-white/5 relative"><span class="material-symbols-outlined text-primary text-6xl absolute top-6 right-6 opacity-20">format_quote</span><div class="flex gap-1 mb-6"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span></div><p class="text-body-lg text-on-surface mb-8 italic">"Serviço impecável. Aluguei um Prado para uma viagem de negócios a Benguela e o carro estava novo. A entrega no aeroporto de Luanda foi pontual e profissional."</p><div class="flex items-center gap-4"><div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center font-bold text-primary">MP</div><div><p class="font-bold text-white">Manuel Pedro</p><p class="text-xs text-on-surface-variant">Empresário Executivo</p></div></div></div><div class="bg-surface p-10 rounded-xl border border-white/5 relative"><span class="material-symbols-outlined text-primary text-6xl absolute top-6 right-6 opacity-20">format_quote</span><div class="flex gap-1 mb-6"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL'1;">star</span></div><p class="text-body-lg text-on-surface mb-8 italic">"A ADRICAR superou minhas expectativas. Precisava de um carro de luxo para um evento social e a Mercedes estava impecável. O atendimento via WhatsApp facilita muito."</p><div class="flex items-center gap-4"><div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center font-bold text-primary">SC</div><div><p class="font-bold text-white">Sandra Costa</p><p class="text-xs text-on-surface-variant">Consultora de Eventos</p></div></div></div></div></div></section>
+
+<!-- FAQ SECTION -->
+<section class="py-24 bg-surface"><div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid md:grid-cols-3 gap-20"><div class="md:col-span-2"><h2 class="font-headline-lg text-headline-lg text-white mb-12">Perguntas Frequentes</h2><div class="space-y-4"><div class="border-b border-white/10 pb-4 faq-item"><button class="w-full flex justify-between items-center text-left group faq-question"><span class="font-bold text-white group-hover:text-primary transition-colors">Quais os documentos necessários?</span><span class="material-symbols-outlined text-on-surface-variant faq-icon">expand_more</span></button><div class="faq-answer"><p class="text-on-surface-variant text-sm">Necessita apenas de CARTA DE CONDUÇÃO válida, BI ou Passaporte e um comprovativo de morada.</p></div></div><div class="border-b border-white/10 pb-4 faq-item"><button class="w-full flex justify-between items-center text-left group faq-question"><span class="font-bold text-white group-hover:text-primary transition-colors">Vocês entregam o carro no Aeroporto de Luanda?</span><span class="material-symbols-outlined text-on-surface-variant faq-icon">expand_more</span></button><div class="faq-answer"><p class="text-on-surface-variant text-sm">Sim, entregamos e recolhemos no Aeroporto Internacional 4 de Fevereiro sem custos adicionais.</p></div></div><div class="border-b border-white/10 pb-4 faq-item"><button class="w-full flex justify-between items-center text-left group faq-question"><span class="font-bold text-white group-hover:text-primary transition-colors">Existe um limite de quilometragem?</span><span class="material-symbols-outlined text-on-surface-variant faq-icon">expand_more</span></button><div class="faq-answer"><p class="text-on-surface-variant text-sm">Oferecemos pacotes com quilometragem livre e planos com limite reduzido, consulte condições.</p></div></div><div class="border-b border-white/10 pb-4 faq-item"><button class="w-full flex justify-between items-center text-left group faq-question"><span class="font-bold text-white group-hover:text-primary transition-colors">Como funciona o pagamento?</span><span class="material-symbols-outlined text-on-surface-variant faq-icon">expand_more</span></button><div class="faq-answer"><p class="text-on-surface-variant text-sm">Aceitamos transferência bancária, dinheiro e cartões Visa/Mastercard.</p></div></div></div></div><div class="bg-surface-container-high p-8 rounded-xl h-fit border border-white/5"><span class="material-symbols-outlined text-4xl text-primary mb-6">help_center</span><h3 class="font-headline-sm text-headline-sm text-white mb-4">Ainda tem dúvidas?</h3><p class="text-on-surface-variant mb-8">Nossa equipe está disponível 24/7 para ajudar com qualquer questão sobre seu aluguer.</p><button class="w-full btn-shine text-white py-4 rounded-lg font-bold flex items-center justify-center gap-2 hover:scale-95 transition-transform"><span class="material-symbols-outlined">brand_family</span> FALAR NO WHATSAPP</button></div></div></section>
+
+<!-- FOOTER -->
+<footer class="bg-surface-container-lowest full-width relative border-t border-white/5"><div class="flex flex-col items-center justify-center w-full px-margin-mobile md:px-margin-desktop py-12 gap-base"><div class="font-headline-md text-headline-md font-bold text-on-surface mb-6">ADRICAR</div><div class="flex flex-wrap justify-center gap-8 mb-8"><a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Privacidade</a><a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Termos de Uso</a><a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Frota VIP</a><a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Suporte</a></div><div class="flex gap-6 mb-8 text-on-surface-variant"><span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all">social_leaderboard</span><span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all">photo_camera</span><span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all">alternate_email</span></div><p class="font-body-md text-body-md text-on-surface-variant text-center max-w-lg">© 2026 ADRICAR Rent a Car. Todos os direitos reservados. Experiência de condução premium em Angola.</p></div></footer>
+
+<script>
+  window.addEventListener("load", function() {
+    // Loader
+    let progress = 0, interval = setInterval(() => { progress += Math.random() * 15; if(progress>=100){ progress=100; clearInterval(interval); } document.getElementById('progressFill').style.width = Math.min(progress,100)+'%'; if(progress>=100) setTimeout(()=>{ document.getElementById('preloader').style.opacity='0'; setTimeout(()=>{ document.getElementById('preloader').style.display='none'; },800); },200); }, 120);
+    
+    // Lenis Smooth Scroll
+    const lenis = new Lenis({ duration:1.2, easing: (t)=>Math.min(1,1.001-Math.pow(2,-10*t)) });
+    function raf(time){ lenis.raf(time); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Reveal animations
+    const faders = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); observer.unobserve(e.target); } }); },{threshold:0.2});
+    faders.forEach(f=>observer.observe(f));
+    
+    // Counters
+    const counters = document.querySelectorAll('.counter-value');
+    const animateCounter = (counter) => { const target = +counter.getAttribute('data-target'); let current = 0; const increment = target / 60; const update = () => { current += increment; if(current < target) { counter.innerText = Math.ceil(current); requestAnimationFrame(update); } else counter.innerText = target; }; update(); };
+    const counterObserver = new IntersectionObserver((entries)=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ animateCounter(entry.target); counterObserver.unobserve(entry.target); } }); },{threshold:0.6});
+    counters.forEach(c=>counterObserver.observe(c));
+    
+    // SIMULADOR - Range slider funcionando com atualização de preço
+    const rangeSlider = document.getElementById('diasRange');
+    const diasValueSpan = document.getElementById('diasValue');
+    const priceDisplay = document.getElementById('priceDisplay');
+    const precoPorDia = 36000; // Preço base por dia
+    
+    function atualizarPreco() {
+      const dias = parseInt(rangeSlider.value);
+      const total = precoPorDia * dias;
+      diasValueSpan.innerText = dias;
+      priceDisplay.innerText = total.toLocaleString() + ' KZ';
+    }
+    
+    if(rangeSlider) {
+      rangeSlider.addEventListener('input', atualizarPreco);
+      atualizarPreco(); // Inicializar
+    }
+    
+    // Função para enviar mensagem WhatsApp com os dados do simulador
+    function enviarWhatsAppSimulador(nome, telefone, dias, preco) {
+      const mensagem = `Olá ADRICAR! 👋\n\nGostaria de fazer uma reserva pelo simulador:\n\n📝 *Nome:* ${nome}\n📞 *Telefone:* ${telefone}\n📅 *Dias de aluguer:* ${dias} dias\n💰 *Orçamento estimado:* ${preco} KZ\n\nPodem entrar em contacto comigo? 🚗✨`;
+      const url = `https://wa.me/244900000000?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, '_blank');
+    }
+    
+    // Botão do simulador
+    const simularBtn = document.getElementById('simularReservaBtn');
+    if(simularBtn) {
+      simularBtn.addEventListener('click', function() {
+        const nome = document.getElementById('simNome')?.value || 'Não informado';
+        const telefone = document.getElementById('simTelefone')?.value || 'Não informado';
+        const dias = document.getElementById('diasRange')?.value || '5';
+        const preco = document.getElementById('priceDisplay')?.innerText || '180.000 KZ';
+        
+        if(!document.getElementById('simNome')?.value || !document.getElementById('simTelefone')?.value) {
+          alert('Por favor, preencha o nome e telefone para continuar.');
+          return;
+        }
+        enviarWhatsAppSimulador(nome, telefone, dias, preco);
+      });
+    }
+    
+    // Botões de WhatsApp nos cards da frota
+    const whatsappBtns = document.querySelectorAll('.whatsapp-btn');
+    whatsappBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const carro = this.getAttribute('data-carro');
+        const precoDia = this.getAttribute('data-preco');
+        const mensagem = `Olá ADRICAR! 👋\n\nEstou interessado em alugar o *${carro}*.\n💰 Preço por dia: ${parseInt(precoDia).toLocaleString()} KZ\n\nPodem me dar mais informações sobre disponibilidade? 🚗✨`;
+        const url = `https://wa.me/244900000000?text=${encodeURIComponent(mensagem)}`;
+        window.open(url, '_blank');
+      });
+    });
+    
+    // Botão "LIGUEM-ME AGORA"
+    const ligarBtn = document.getElementById('ligarBtn');
+    if(ligarBtn) {
+      ligarBtn.addEventListener('click', function() {
+        const nome = document.getElementById('callNome')?.value || 'Cliente';
+        const telefone = document.getElementById('callTelefone')?.value || '';
+        if(!telefone) {
+          alert('Por favor, insira o seu número de telefone.');
+          return;
+        }
+        const mensagem = `Olá ADRICAR! 👋\n\nSou ${nome}, meu número é ${telefone}. Gostaria de solicitar uma chamada para informações sobre aluguer de viaturas.`;
+        const url = `https://wa.me/244900000000?text=${encodeURIComponent(mensagem)}`;
+        window.open(url, '_blank');
+      });
+    }
+    
+    // Botão urgência
+    const urgBtn = document.getElementById('urgBtn');
+    if(urgBtn) {
+      urgBtn.addEventListener('click', function() {
+        const telefone = document.getElementById('urgTel')?.value || '';
+        if(!telefone) {
+          alert('Por favor, insira o seu número de telefone.');
+          return;
+        }
+        const mensagem = `Olá ADRICAR! 👋\n\nVi a oferta de desconto de 10% e gostaria de fazer uma reserva urgente.\n📞 Meu WhatsApp: ${telefone}\n\nAguardo contacto! 🚗💨`;
+        const url = `https://wa.me/244900000000?text=${encodeURIComponent(mensagem)}`;
+        window.open(url, '_blank');
+      });
+    }
+    
+    // Navbar scroll effect
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', ()=>{ if(window.scrollY > 50) header.classList.add('nav-blur'), header.classList.remove('nav-initial'); else header.classList.add('nav-initial'), header.classList.remove('nav-blur'); });
+    
+    // Mobile menu
+    const menuBtn = document.getElementById('mobileMenuBtn'); const panel = document.getElementById('mobileMenuPanel'); const closeBtn = document.getElementById('closeMobileMenu');
+    if(menuBtn && panel) menuBtn.onclick = () => panel.classList.add('open'); if(closeBtn) closeBtn.onclick = () => panel.classList.remove('open');
+    
+    // FAQ accordion
+    document.querySelectorAll('.faq-item .faq-question').forEach(btn => { btn.addEventListener('click',()=>{ const parent = btn.closest('.faq-item'); parent.classList.toggle('active'); }); });
+    
+    // Countdown timer
+    function updateCountdown(){ const now = new Date(); const target = new Date(); target.setHours(target.getHours()+2); let diff = target - now; if(diff<0) diff=0; const hrs = Math.floor(diff/(1000*60*60)); const mins = Math.floor((diff%(1000*60*60))/(1000*60)); const secs = Math.floor((diff%(1000*60))/1000); document.getElementById('hours').innerText = String(hrs).padStart(2,'0'); document.getElementById('minutes').innerText = String(mins).padStart(2,'0'); document.getElementById('seconds').innerText = String(secs).padStart(2,'0'); } setInterval(updateCountdown,1000); updateCountdown();
+  });
+</script>
+</body>
+</html>
